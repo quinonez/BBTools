@@ -21,42 +21,48 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
     this.freqData = new Array( nbinsx + 2 ); // data array of frequencies for each bin. Two bins extra have been added, one for underflow and the another one for overflow.
   }
 
-
   BBTH1.prototype = {
     constructor: BBTH1,
 
     Fill: function( value ) {
       return this.rawData.push( value );
     },
+ 
+    // Deattach data preparation
+    Prepare: function(){
+      var binxlow = this.xmin;
+      var binwidth = ( this.xmax - this.xmin ) / this.nbinsx;
+      var binxup = binxlow + binwidth;
+  
+      // Initialize frequencies to zero.
+      for( var i = 0; i < this.freqData.length; i++ ){
+        this.freqData[ i ] = 0;
+      }
+  
+      // First fill array of frequencies for each bin: freqData.
+      for( var i = 0; i < this.rawData.length; i++ ){
+        binxlow = this.xmin;
+        binxup = binxlow + binwidth;
+        if( this.rawData[ i ] < this.xmin ) this.freqData[ 0 ] += 1; // Underflow.
+        if( this.rawData[ i ] >= this.xmax ) this.freqData[ nbinsx + 1 ] += 1; // Overflow.
+        // From index 1 til index nbinsx-2 of freqData Array.
+        for( var j = 1; j < this.freqData.length - 1; j++ ){
+          if( this.rawData[ i ] >= binxlow && this.rawData[ i ] < binxup ){
+            this.freqData[ j ] += 1;
+            break;
+          }
+          // Go to the next bin
+          binxlow = binxup;
+          binxup += binwidth;   
+        }
+      }
+      console.log(this.freqData);
+       
+    },
     
     Draw: function(){
-    var binxlow = this.xmin;
-    var binwidth = ( this.xmax - this.xmin ) / this.nbinsx;
-    var binxup = binxlow + binwidth;
-
-    // Initialize frequencies to zero.
-    for( var i = 0; i < this.freqData.length; i++ ){
-      this.freqData[ i ] = 0;
-    }
-
-    // First fill array of frequencies for each bin: freqData.
-    for( var i = 0; i < this.rawData.length; i++ ){
-      binxlow = this.xmin;
-      binxup = binxlow + binwidth;
-      if( this.rawData[ i ] < this.xmin ) this.freqData[ 0 ] += 1; // Underflow.
-      if( this.rawData[ i ] >= this.xmax ) this.freqData[ nbinsx + 1 ] += 1; // Overflow.
-      // From index 1 til index nbinsx-2 of freqData Array.
-      for( var j = 1; j < this.freqData.length - 1; j++ ){
-        if( this.rawData[ i ] >= binxlow && this.rawData[ i ] < binxup ){
-          this.freqData[ j ] += 1;
-          break;
-        }
-        // Go to the next bin
-        binxlow = binxup;
-        binxup += binwidth;   
-      }
-    }
-    console.log(this.freqData);
+      this.Prepare();
+      var binwidth = ( this.xmax - this.xmin ) / this.nbinsx;
       // **************************************************************
       // Now start visualization
       // **************************************************************
@@ -96,12 +102,13 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
       // Don't do it because that need to be accessed by the user
 
       // Displaying data    
-      this.freqData.forEach(function(d){
-        chart.append( "rect" )
-          .attr( "x", function(d){return binwidth;} )
-          .attr( "width", binwidth )
-          .attr( "y", height/2 )
-          .attr( "height", height )
+      this.freqData.forEach(function(d,i){
+		        chart.append( "rect" )
+          .attr( "x", function(){return (i-1)*xScale(binwidth);} )
+          .attr( "width", xScale(binwidth)-2)
+          .attr( "y", yScale(d) )
+          .attr( "height", function(){return height-yScale(d);}  )
+		        .attr("fill", "steelblue");
       });
     } // Ends function Draw
   };
