@@ -56,7 +56,7 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
         binxup += binwidth;   
       }
     }
-    console.log(this.freqData);
+
       // **************************************************************
       // Now start visualization
       // **************************************************************
@@ -73,8 +73,6 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
       var xScale = d3.scale.linear().domain([ this.xmin, this.xmax ]).range( [ 0, width ] ).nice();
       var yScale = d3.scale.linear().domain([ 0, d3.max( this.freqData ) ]).range( [ height, 0 ] ).nice();
       // Defining the plot's domain
-      //xScale.domain([ this.xmin, this.xmax ]).nice();
-      //yScale.domain([ 0, d3.max( this.freqData ) ]).nice();
 
       var xAxis = d3.svg.axis()
         .scale( xScale )
@@ -88,11 +86,7 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
         .attr( "transform", "translate(0," + height + ")" );
 
       var yAxisGroup = chart.append( "g" )
-<<<<<<< HEAD
-        .attr( "transform", "translate(0,0)");
-=======
         .attr( "transform", "translate(0,0)" );
->>>>>>> 938f02a997d3841953ea4961bc3cfe63fcae1d7e
 
       xAxis( xAxisGroup );
       yAxis( yAxisGroup );
