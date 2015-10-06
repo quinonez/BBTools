@@ -110,7 +110,11 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
           .attr( "height", function(){return height-yScale(d);}  )
 		        .attr("fill", "steelblue");
       });
-    } // Ends function Draw
+    }, // Ends function Draw
+
+    
+
+
   };
 
   return BBTH1;
