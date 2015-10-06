@@ -1,4 +1,4 @@
-define( ['require', 'd3', 'THREE', 'BBTH1' ], function( require, d3, THREE, BBTH1 ){
+define( ['require', 'd3', 'THREE', 'BBTH1', 'BBTAxis' ], function( require, d3, THREE, BBTH1, BBTAxis ){
 //  var d3 = require('lib/d3.min');
 //  var THREE = require('lib/three.min');
 
@@ -16,6 +16,9 @@ define( ['require', 'd3', 'THREE', 'BBTH1' ], function( require, d3, THREE, BBTH
   histo.Fill(3.98);
   histo.Fill(12);
   histo.Fill(7);
+
+  var xaxishisto = new BBTAxis("xaxishisto", "Eje x en [u]");
+
   histo.Draw();
 
   var scene = new THREE.Scene();

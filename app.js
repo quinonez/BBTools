@@ -4,7 +4,8 @@ requirejs.config({
     'app': "../app",
     'd3': "lib/d3.min",
     'THREE': "lib/three.min",
-    'BBTH1': "BBTH1"
+    'BBTH1': "BBTH1",
+    'BBTAxis': "BBTAxis"
   },
   shim: {
     THREE: {

@@ -88,7 +88,11 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
         .attr( "transform", "translate(0," + height + ")" );
 
       var yAxisGroup = chart.append( "g" )
+<<<<<<< HEAD
         .attr( "transform", "translate(0,0)");
+=======
+        .attr( "transform", "translate(0,0)" );
+>>>>>>> 938f02a997d3841953ea4961bc3cfe63fcae1d7e
 
       xAxis( xAxisGroup );
       yAxis( yAxisGroup );
