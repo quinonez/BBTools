@@ -76,17 +76,20 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
 
       var xAxis = d3.svg.axis()
         .scale( xScale )
-        .orient( "bottom" );
+        .orient( "bottom" );		//Defining the scale of axes x, the domain and range are defined with xScale variable
 
       var yAxis = d3.svg.axis()
         .scale( yScale )
-        .orient( "left" );
+        .orient( "left" );		//Defining the scale of axes y, the domain and range are defined with yScale variable
 
       var xAxisGroup = chart.append( "g" )
-        .attr( "transform", "translate(0," + height + ")" );
-
+	.attr( "class" , " axis")
+        .attr( "transform", "translate(0," + (height+1) + ")" ); //Example of how, D3 library use  the order .attr("class","axis")
+								 //to define the axes properties
       var yAxisGroup = chart.append( "g" )
-        .attr( "transform", "translate(0,0)" );
+	.attr( "class" , " axis")
+        .attr( "transform", "translate(0,0)" );			//Example of how, D3 library use  the order .attr("class","axis")
+								 //to define the axes properties
 
       xAxis( xAxisGroup );
       yAxis( yAxisGroup );
