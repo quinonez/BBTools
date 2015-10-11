@@ -19,6 +19,10 @@ define( [ 'd3', 'THREE', 'Axis' ], function( d3, THREE, Axis ){
     this.xmax = xmax;
     this.rawData = []; // data array filled by Fill function.
     this.freqData = new Array( nbinsx + 2 ); // data array of frequencies for each bin. Two bins extra have been added, one for underflow and the another one for overflow.
+
+    this.fXaxis = Object.create( Axis() );
+    this.fYaxis = Object.create( Axis() );
+
   }
 
   H1.prototype = {
@@ -112,6 +116,13 @@ define( [ 'd3', 'THREE', 'Axis' ], function( d3, THREE, Axis ){
       });
     }, // Ends function Draw
 
+    GetXaxis: function(){
+      return this.fXaxis;
+    },
+
+    GetYaxis: function(){
+      return this.fYaxis;
+    },
     
 
 
