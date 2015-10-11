@@ -37,6 +37,8 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
     this.fLabelSize;
     this.fTitleOffset;
 
+    this.d3Axis = d3.svg.axis();
+
   }
 
   Axis.prototype = {
@@ -48,33 +50,40 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
     // 
     SaveAttributes: function( out, name, subname ){
       
+      return this;
     },
 
     // Set color of the line axis and tick marks.
     SetAxisColor: function( color = 1 ){
-      this.style( "stroke", color );     
+      this.d3Axis.style( "stroke", color );     
+
+      return this;
     },
 
     // Set color of labels.
     SetLabelColor: function( color = 1 ){
 
+      return this;
     },
 
     // Set labels' font.
     SetLabelFont: function( font = 62 ){
 
+      return this;
     },
 
     // Set distance between the axis and the labels.
     // In ROOT: The distance is expressed in per cent of the pad width.
     SetLabelOffset: function( offset = 0.005 ){
 
+      return this;
     },
 
     // Set size of axis labels.
     // In ROOT: The size is expressed in per cent of the pad width.
     SetLabelSize: function( size = 0.04 ){
 
+      return this;
     },
 
     /* Set the number of divisions for this axis.
@@ -96,15 +105,18 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
     maximum values. */
     SetNdivisions: function( n = 510, optim = true ){
       
+      return this;
     },
     SetNdivisions: function( n1, n2, n3, optim = true ){
       
+      return this;
     },
 
     // Set tick mark length
     // The length is expressed in per cent of the pad width
     SetTickLength: function( lenght = 0.03 ){
       
+      return this;
     },
 
     /* Set distance between the axis and the axis title
@@ -114,22 +126,26 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
     offset = 1.2 will add 20 per cent more to the default offset. */
     SetTitleOffset: function( offset = 1 ){
     
+      return this;
     },
     
     // Set size of axis title.
     // The size is expressed in per cent of the pad width.
     SetTitleSize: function( size = 0.04 ){
     
+      return this;
     },
 
     // Set color of axis title
     SetTitleColor: function( color = 1 ){
 
+      return this;
     },
 
     // Set the title font.
     SetTitleFont: function( font = 62 ){
       
+      return this;
     },
 
     GetNdivisions: function(){
