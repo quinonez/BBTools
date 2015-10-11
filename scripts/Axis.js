@@ -10,6 +10,20 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
   "use strict";
 
   // Object Constructor BBH1 Building Block Histogram 1D. 
+  function Axis( ){
+    this.name = "Axis name";
+    this.title = "Axis title";
+
+    this.fNdivisions;
+    this.fAxisColor;
+    this.fLabelColor;
+    this.fLabelFont;
+    this.fLabelOffset;
+    this.fLabelOffset;
+    this.fLabelSize;
+    this.fTitleOffset;
+
+  }
   function Axis( name, title ){
     this.name = name;
     this.title = title;
@@ -38,7 +52,7 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
 
     // Set color of the line axis and tick marks.
     SetAxisColor: function( color = 1 ){
-    
+      this.style( "stroke", color );     
     },
 
     // Set color of labels.
