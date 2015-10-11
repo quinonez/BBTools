@@ -6,11 +6,11 @@ This module has all functionalities for graphical display of user data.
 Module Dependencies: d3, THREE, BBMathematics, BBStatistics.
  
 */
-define( [ 'd3', 'THREE', 'BBTAxis' ], function( d3, THREE, BBTAxis ){
+define( [ 'd3', 'THREE', 'Axis' ], function( d3, THREE, Axis ){
   "use strict";
 
   // Object Constructor BBH1 Building Block Histogram 1D. 
-  function BBTH1( name, title, nbinsx, xmin, xmax ){
+  function H1( name, title, nbinsx, xmin, xmax ){
     this.fDimension = 1; // Dimension of the plot data.
     this.name = name;
     this.title = title;
@@ -21,8 +21,8 @@ define( [ 'd3', 'THREE', 'BBTAxis' ], function( d3, THREE, BBTAxis ){
     this.freqData = new Array( nbinsx + 2 ); // data array of frequencies for each bin. Two bins extra have been added, one for underflow and the another one for overflow.
   }
 
-  BBTH1.prototype = {
-    constructor: BBTH1,
+  H1.prototype = {
+    constructor: H1,
 
     Fill: function( value ) {
       return this.rawData.push( value );
@@ -117,7 +117,7 @@ define( [ 'd3', 'THREE', 'BBTAxis' ], function( d3, THREE, BBTAxis ){
 
   };
 
-  return BBTH1;
+  return H1;
  
-}); // Ends Module BBTH1
+}); // Ends Module H1
 

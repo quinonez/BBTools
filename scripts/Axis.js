@@ -1,5 +1,5 @@
 /*
-Module BBTAxis Building Block and Tools Axis.
+Module Axis Building Block and Tools Axis.
 
 This module has all functionalities for graphical display of axes.
 
@@ -10,7 +10,7 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
   "use strict";
 
   // Object Constructor BBH1 Building Block Histogram 1D. 
-  function BBTAxis( name, title ){
+  function Axis( name, title ){
     this.name = name;
     this.title = title;
 
@@ -25,8 +25,8 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
 
   }
 
-  BBTAxis.prototype = {
-    constructor: BBTAxis,
+  Axis.prototype = {
+    constructor: Axis,
     // ****************************************************
     // * Functions coming from ROOT mother class TAxisAtt *
     // ****************************************************
@@ -169,7 +169,7 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
 
   };
 
-  return BBTAxis;
+  return Axis;
  
-}); // Ends Module BBTAxis
+}); // Ends Module Axis
 
