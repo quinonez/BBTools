@@ -22,6 +22,7 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
     this.fLabelOffset;
     this.fLabelSize;
     this.fTitleOffset;
+    this.d3Axis = d3.svg.axis();
 
   }
   function Axis( name, title ){
