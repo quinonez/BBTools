@@ -1,4 +1,4 @@
-define( ['require', 'd3', 'THREE', 'H1', 'Axis' ], function( require, d3, THREE, H1, Axis ){
+define( ['require', 'd3', 'THREE', 'H1', 'Axis' , 'Painter'], function( require, d3, THREE, H1, Axis , Painter ){
 //  var d3 = require('lib/d3.min');
 //  var THREE = require('lib/three.min');
 
@@ -7,7 +7,7 @@ define( ['require', 'd3', 'THREE', 'H1', 'Axis' ], function( require, d3, THREE,
     .text("Successfully loaded D3 version " + d3.version); 
 
 
-  var histo = new BBT.H1("nombre", "titulo", 10, 0, 200);
+  var histo = new H1("nombre", "titulo", 10, 0, 200);
   histo.Fill(123.4);
   histo.Fill(113.4);
   histo.Fill(129.4);
@@ -17,8 +17,8 @@ define( ['require', 'd3', 'THREE', 'H1', 'Axis' ], function( require, d3, THREE,
   histo.Fill(12);
   histo.Fill(7);
 
-  var xaxishisto = new BBT.Axis("xaxishisto", "Eje x en [u]");
-
+  //var xaxishisto = new H1.fXaxis("xaxishisto", "Eje x en [u]");
+	
   histo.Draw();
 
   var scene = new THREE.Scene();
