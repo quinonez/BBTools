@@ -9,7 +9,7 @@ Module Dependencies: d3, THREE, BBMathematics, BBStatistics.
 define( [ 'd3', 'THREE', 'Axis' , 'Painter' ], function( d3, THREE, Axis , Painter ){
   "use strict";
 
-  // Object Constructor BBH1 Building Block Histogram 1D. 
+  // Object Constructor H1 Building Block Histogram 1D. 
   function H1( name, title, nbinsx, xmin, xmax ){
     this.fDimension = 1; // Dimension of the plot data.
     this.name = name;
@@ -20,9 +20,9 @@ define( [ 'd3', 'THREE', 'Axis' , 'Painter' ], function( d3, THREE, Axis , Paint
     this.rawData = []; // data array filled by Fill function.
     this.freqData = new Array( nbinsx + 2 ); // data array of frequencies for each bin. Two bins extra have been added, one for underflow and the another one for overflow.
 
-    this.fXaxis = Object.create( Axis() );
-    this.fYaxis = Object.create( Axis() );
-	this.fPainter = Object.create( Painter() );
+    this.fXaxis =new Axis("xaxishisto", "Eje x en [u]") ;
+    this.fYaxis =new Axis("xaxishisto", "Eje x en [u]") ;
+	//this.fPainter = Object.create( Painter() );
   }
 
   H1.prototype = {
@@ -74,17 +74,17 @@ define( [ 'd3', 'THREE', 'Axis' , 'Painter' ], function( d3, THREE, Axis , Paint
       var width = 640 -  margin.left - margin.right ;
       var height = 400 -  margin.top - margin.bottom ;
       var svg = d3.select( "#c1" ).append( "svg" )
-        .attr( "width", height + margin.left + margin.right )
-        .attr( "height", width + margin.top + margin.bottom );
+        .attr( "width", width + margin.left + margin.right )
+        .attr( "height", height + margin.top + margin.bottom );
       // Drawing a chart inside the svg
       var chart = svg.append( "g" )
         .attr( "transform", "translate(" + margin.left + "," + margin.top + ")" );
       // Scaling the data
-      var xScale = d3.scale.linear().range( [ 0, width ] );
-      var yScale = d3.scale.linear().range( [ height, 0 ] );
+      var xScale = d3.scale.linear().domain([ this.xmin, this.xmax ]).range( [ 0, width ] );
+      var yScale = d3.scale.linear().domain([ 0, d3.max( this.freqData ) ]).range( [ height, 0 ] );
       // Defining the plot's domain
-      xScale.domain([ this.xmin, this.xmax ]).nice();
-      yScale.domain([ 0, d3.max( this.rawData ) ]).nice();
+      //xScale..nice();
+      //yScale.nice();
 
       var xAxis = d3.svg.axis()
         .scale( xScale )
@@ -98,7 +98,7 @@ define( [ 'd3', 'THREE', 'Axis' , 'Painter' ], function( d3, THREE, Axis , Paint
         .attr( "transform", "translate(0," + height + ")" );
 
       var yAxisGroup = chart.append( "g" )
-        .attr( "transform", "translate(0," + height + ")" );
+        .attr( "transform", "translate(0,0)" );
 
       xAxis( xAxisGroup );
       yAxis( yAxisGroup );
@@ -124,10 +124,7 @@ define( [ 'd3', 'THREE', 'Axis' , 'Painter' ], function( d3, THREE, Axis , Paint
       return this.fYaxis;
     },
     
-
-
-  };
-
+};
   return H1;
  
 }); // Ends Module H1
