@@ -10,21 +10,7 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
   "use strict";
 
   // Object Constructor BBH1 Building Block Histogram 1D. 
-  function Axis( ){
-    this.name = "Axis name";
-    this.title = "Axis title";
-
-    this.fNdivisions;
-    this.fAxisColor;
-    this.fLabelColor;
-    this.fLabelFont;
-    this.fLabelOffset;
-    this.fLabelOffset;
-    this.fLabelSize;
-    this.fTitleOffset;
-    this.d3Axis = d3.svg.axis();
-
-  }
+ 
   function Axis( name, title ){
     this.name = name;
     this.title = title;
@@ -37,7 +23,6 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
     this.fLabelOffset;
     this.fLabelSize;
     this.fTitleOffset;
-
     this.d3Axis = d3.svg.axis();
 
   }
@@ -49,40 +34,40 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
     // ****************************************************
 
     // 
-    SaveAttributes: function( out, name, subname ){
+    /*SaveAttributes: function( out, name, subname ){
       
       return this;
     },
 
     // Set color of the line axis and tick marks.
-    SetAxisColor: function( color = 1 ){
+    SetAxisColor: function( color ){
       this.d3Axis.style( "stroke", color );     
 
       return this;
     },
 
     // Set color of labels.
-    SetLabelColor: function( color = 1 ){
+    SetLabelColor: function( color ){
 
       return this;
     },
 
     // Set labels' font.
-    SetLabelFont: function( font = 62 ){
+    SetLabelFont: function( font ){
 
       return this;
     },
 
     // Set distance between the axis and the labels.
     // In ROOT: The distance is expressed in per cent of the pad width.
-    SetLabelOffset: function( offset = 0.005 ){
+    SetLabelOffset: function( offset  ){
 
       return this;
     },
 
     // Set size of axis labels.
     // In ROOT: The size is expressed in per cent of the pad width.
-    SetLabelSize: function( size = 0.04 ){
+    SetLabelSize: function( size  ){
 
       return this;
     },
@@ -103,19 +88,19 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
     e.g. 512 means 12 primary and 5 secondary divisions.
 
     If the number of divisions is "optimized" (see above) n1, n2, n3 are
-    maximum values. */
-    SetNdivisions: function( n = 510, optim = true ){
+    maximum values. 
+    SetNdivisions: function( n, optim  ){
       
       return this;
     },
-    SetNdivisions: function( n1, n2, n3, optim = true ){
+    SetNdivisions: function( n1, n2, n3, optim){
       
       return this;
     },
 
     // Set tick mark length
     // The length is expressed in per cent of the pad width
-    SetTickLength: function( lenght = 0.03 ){
+    SetTickLength: function( lenght ){
       
       return this;
     },
@@ -124,27 +109,27 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
     Offset is a correction factor with respect to the "standard" value.
     offset = 1  uses the default position that is computed in function
     of the label offset and size.
-    offset = 1.2 will add 20 per cent more to the default offset. */
-    SetTitleOffset: function( offset = 1 ){
+    offset = 1.2 will add 20 per cent more to the default offset. 
+    SetTitleOffset: function( offset  ){
     
       return this;
     },
     
     // Set size of axis title.
     // The size is expressed in per cent of the pad width.
-    SetTitleSize: function( size = 0.04 ){
+    SetTitleSize: function( size  ){
     
       return this;
     },
 
     // Set color of axis title
-    SetTitleColor: function( color = 1 ){
+    SetTitleColor: function( color ){
 
       return this;
     },
 
     // Set the title font.
-    SetTitleFont: function( font = 62 ){
+    SetTitleFont: function( font ){
       
       return this;
     },
@@ -188,16 +173,7 @@ define( [ 'd3', 'THREE' ], function( d3, THREE ){
     GetTitleFont: function(){
       return this.fTitleFont;
     },
-
-
-
-
-
-
-
-
-
-
+*/
   };
 
   return Axis;
