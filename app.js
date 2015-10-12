@@ -5,6 +5,7 @@ requirejs.config({
     'd3': "lib/d3.min",
     'THREE': "lib/three.min",
     'H1': "H1",
+    'Painter': "Painter",
     'Axis': "Axis"
   },
   shim: {
