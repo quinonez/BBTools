@@ -6,7 +6,7 @@ This module has all functionalities for graphical display of user data.
 Module Dependencies: d3, THREE, BBMathematics, BBStatistics.
  
 */
-define( [ 'd3', 'THREE', 'Axis' ], function( d3, THREE, Axis ){
+define( [ 'd3', 'THREE', 'Axis' , 'Painter' ], function( d3, THREE, Axis , Painter ){
   "use strict";
 
   // Object Constructor BBH1 Building Block Histogram 1D. 
@@ -22,7 +22,7 @@ define( [ 'd3', 'THREE', 'Axis' ], function( d3, THREE, Axis ){
 
     this.fXaxis = Object.create( Axis() );
     this.fYaxis = Object.create( Axis() );
-
+	this.fPainter = Object.create( Painter() );
   }
 
   H1.prototype = {
