@@ -559,7 +559,7 @@
          y="316.72473"
          x="115.99586"
          id="tspan3041-7"
-         sodipodi:role="line">three.js</tspan></text>
+         sodipodi:role="line">THREEJS</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Inconsolata;-inkscape-font-specification:Inconsolata Medium"
@@ -1933,7 +1933,7 @@
          sodipodi:role="line"
          id="tspan4278"
          x="390.62708"
-         y="382.8118">Step 2: Go to directory where </tspan><tspan
+         y="382.8118">Step 2: Go to folder tests </tspan><tspan
          sodipodi:role="line"
          x="390.62708"
          y="397.8118"
@@ -1941,7 +1941,7 @@
          sodipodi:role="line"
          x="390.62708"
          y="412.8118"
-         id="tspan4280">(/var/www/html/BBTools/tests or</tspan><tspan
+         id="tspan4280">(cd BBTools/tests or</tspan><tspan
          sodipodi:role="line"
          x="390.62708"
          y="427.8118"
