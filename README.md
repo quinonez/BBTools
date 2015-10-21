@@ -22,6 +22,8 @@ Using it by doing:
 * Users can define histograms like ```var h = BBT.H1("h", "h", nbinsx, xmin, xmax);```.
 * Users can fill histograms like ```h.Fill(numericalValue);```
 * Users can draw histograms without drawing options like ```h.Draw();```
+
+
 #### Version 1.1
 Same as version 1.0 but including folder of examples call ```workarea```.
 
