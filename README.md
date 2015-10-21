@@ -25,7 +25,7 @@ Using it by doing:
 
 
 #### Version 1.1
-Same as version 1.0 but including folder of examples call ```workarea```.
+Same as version 1.0 but including folder of examples called ```workarea```.
 
 
 
