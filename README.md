@@ -86,11 +86,11 @@ Using it by doing:
 
 #### Version 1.0
 * Users can define histograms like 
-  ```js 
+  ```{r, engine='javascript', test1} 
 	  var h = BBT.H1("h", "h", nbinsx, xmin, xmax);
   ```
 * Users can fill histograms like 
-  ```js 
+  ```{r, engine='js', test2} 
 	  h.Fill(numericalValue);
   ```
 * Users can draw histograms without drawing options like 
