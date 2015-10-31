@@ -9,14 +9,24 @@ define(function (require) {
 
     var $ = require('jquery');
     var convert = require('BBT/convert');
-    var Axis = require('BBT/Axis');
-    var H1 = require('BBT/H1');
+    var FileSaver = require('FileSaver');
+
+    var Axis = require('BBT/Visualization/Axis');
+    var H1 = require('BBT/Visualization/H1');
+
+    var JamesRandom = require('BBT/Generation/Random/JamesRandom');
+    var RandBinomial = require('BBT/Generation/Random/RandBinomial');
 
     //Return the module value.
     return {
         version: '0.0.1, jQuery version is: ' + $.fn.jquery,
         convert: convert,
+        FileSaver: FileSaver,
+
         Axis: Axis,
-        H1: H1
+        H1: H1,
+
+        JamesRandom: JamesRandom,
+        RandBinomial: RandBinomial
     };
 });
