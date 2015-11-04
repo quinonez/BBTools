@@ -165,7 +165,7 @@ define( [], function(){
 
     // Sets the state of the zero terminated array of seeds. Only the first seed is used.
     SetSeeds: function( seeds, dum ){
-      SetSeed(seeds ? 19780503: 0);
+      SetSeed( seeds? seeds: 19780503, 0 );
       theSeeds = seeds;
     },
 
