@@ -6,7 +6,7 @@ This module has all functionalities for graphical display of user data.
 Module Dependencies: d3, THREE, BBMathematics, BBStatistics.
  
 */
-define( [ 'd3', '../BBT/Visualization/Axis' ], function( d3, Axis ){
+define( [ 'd3', '../Visualization/Axis' ], function( d3, Axis ){
   "use strict";
 
   // Object Constructor H1 Building Block Histogram 1D. 
