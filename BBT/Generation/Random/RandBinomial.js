@@ -1,4 +1,4 @@
-/* 
+	/* 
    +----------------------------------------------------------------------+
    |                            HEP Random                                |
    |                       --- RandBinomial ---                           |
@@ -192,7 +192,7 @@ define( [], function(){
     	} else {
     	  rc = (n + 1.0) * ( pq = par / q );          // recurr. relat.
     	  ss = np * q;                              // variance  
-    	  i  = 2.195 * Math.sqrt( ss ) - 4.6 * q ); // i = p1 - 0.5
+    	  i  = 2.195 * Math.sqrt( ss ) - 4.6 * q ; // i = p1 - 0.5
     	  xm = m + 0.5;
     	  xl = m - i;                    // limit left 
     	  xr = m + i + 1;               // limit right
@@ -256,7 +256,8 @@ define( [], function(){
     	}
     
         // acceptance test :  two cases, depending on |K - m|
-    	if( ( Km = labs( K - m ) ) <= DMAX_KM || Km + Km + 2L >= ss ){
+	console.log(abs( K - m ));
+    	if( ( ( Km = Math.abs( K - m ) ) <= DMAX_KM )  || ( (Km + Km + 2) >= ss ) ){
           // computation of p(K) via recurrence relationship from the mode
     	  f = 1.0; // f(m)
     	  if( m < K ){
@@ -278,12 +279,11 @@ define( [], function(){
     	  if( V <= T + E ){
     	    if( n != n_prev || par != p_prev ){
     	      n_prev = n;
-    	      p_prev = par;
-    
-    	      nm = n - m + 1L;
+    	      p_prev = par;  
+    	      nm = n - m + 1;
     	      ch = xm * Math.log( ( m + 1.0 ) / ( pq * nm ) ) + StirlingCorrection( m + 1 ) + StirlingCorrection( nm );
     	    } 
-    	    nK = n - K + 1L;
+    	    nK = n - K + 1;
     
             // computation of log f(K) via Stirling's formula
             // final acceptance-rejection test
