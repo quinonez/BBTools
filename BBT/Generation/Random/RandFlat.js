@@ -46,32 +46,40 @@ define([
   "use strict";
 
   function RandFlat( args ){
-    this.fA = args.a || 0;
-    this.fB = args.b || 1;
-    this.fWidth = args.width || ( args.b - args.a );
-    this.fEngine = args.engine || Object.create( JamesRandom() );
+    this.fa = args.a || 0;
+    this.fb = args.b || 1;
+    this.fwidth = args.width || ( args.b - args.a );
+    this.fengine = args.engine || Object.create( JamesRandom() );
   } 
 
 
-
+  RandFlat.Shoot( args ){
+    var sa = args.a || 0;
+    var sb = args.b || 1;
+    var swidth = args.width || ( args.b - args.a );  
+    var sengine = args.engine || Object.create( JamesRandom() );
+    return ( swidth * sengine.Flat() + sa ); 
+  };
 
 
   RandFlat.prototype = {
     constructor: RandFlat,
 
     Fire: function(){
-      return ( this.fB - this.fA ) * fEngine.Flat() + this.fA;
+      return ( this.fb - this.fa ) * fengine.Flat() + this.fa;
     },
 
     FireArray: function( /* size of vect */ size, /* Array */ vect ){
       for( var i = 0; i < size; ++i ){
         vect.push( this.Fire() );
       }
-    }
+    },
+
+   
+
 
   }
 
   return RandFlat;
-
 });
 
