@@ -32,7 +32,7 @@
 */
 
 define( [
-  '../BBT/Generation/Random/JamesRandom',
+  '../Random/JamesRandom',
 ], function( JamesRandom ){
   "use strict";
 
@@ -40,14 +40,14 @@ define( [
     this.fmean = args.mean || 1.0;
     this.fgamma = args.gamma || 0.2;
     this.fcut = args.cut || undefined;
-    this.fengine = args.engine || Object.create( JamesRandom() );
+    this.fengine = args.engine || Object.create( JamesRandom({}) );
   } 
 
   RandBreitWigner.Shoot = function( args ){
     var smean = args.mean || 1.0;
     var sgamma = args.gamma || 0.2;
     var scut = args.cut || undefined;
-    var sengine = args.engine || Object.create( JamesRandom() );
+    var sengine = args.engine || Object.create( JamesRandom({}) );
 
     if( sgamma == 0 ) return smean;
 
@@ -85,12 +85,12 @@ define( [
     var sa = args.a || 0;
     var sb = args.b || 1;
     var swidth = args.width || ( args.b - args.a );  
-    var sengine = args.engine || Object.create( JamesRandom() );
+    var sengine = args.engine || Object.create( JamesRandom({}) );
     return ( swidth * sengine.Flat() + sa ); 
   };
 
   RandBreitWigner.ShootM2 = function( args ){
-    var sengine = args.engine || Object.create( JamesRandom() );
+    var sengine = args.engine || Object.create( JamesRandom({}) );
     var smean = args.mean || 1.0;
     var sgamma = args.gamma || 0.2;
     var scut = args.cut || undefined;
