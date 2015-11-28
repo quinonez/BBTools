@@ -53,8 +53,7 @@ define( [], function(){
   // Maximum index into the seed table
   var maxIndex = 215;
 
-  function JamesRandom( name, seed ){
-    this.name = name;
+  function JamesRandom( args ){
     this.u = new Array( 97 );
     this.c;
     this.cd;
@@ -62,8 +61,10 @@ define( [], function(){
     this.i97;
     this.j97; 
 
-    SetSeed( seed, 0 );    
-    SetSeeds( theSeed, 0 );
+    this.theSeed = args.seed || 0; 
+
+    this.SetSeed( this.theSeed, 0 )
+    this.SetSeeds( this.theSeed, 0 );
 
   } 
 
@@ -109,7 +110,7 @@ define( [], function(){
       var i;
 
       for (i=0; i<size; ++i) {
-        vect[i] = flat();
+        vect[i] = this.Flat();
       }   
 
     },
@@ -138,7 +139,7 @@ define( [], function(){
       var k = ( ( kl / 169 ) % 178 ) + 1;
       var l = kl % 169;
       
-      theSeed = seed;
+      this.theSeed = seed;
 
       for ( n = 1 ; n < 98 ; n++ ) {
         s = 0.0;
@@ -165,9 +166,9 @@ define( [], function(){
 
     // Sets the state of the zero terminated array of seeds. Only the first seed is used.
     SetSeeds: function( seeds, dum ){
-      SetSeed( seeds? seeds: 19780503, 0 );
-      theSeeds = seeds;
-    },
+      this.SetSeed( seeds? seeds: 19780503, 0 );
+      this.theSeeds = seeds;
+    }/*,
 
     // Sets on filename the current engine status.
     SaveStatus: function( filename ){
@@ -179,7 +180,7 @@ define( [], function(){
     RestoreStatus: function( filename ){
       if( filename === "" ) filename = "JamesRand.conf";
 
-    } /*,
+    } 
 
 
 
