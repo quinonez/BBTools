@@ -1,4 +1,4 @@
-	/* 
+/* 
    +----------------------------------------------------------------------+
    |                            BBT Random                                |
    |                       --- RandBinomial ---                           |
@@ -35,12 +35,29 @@
 define( [], function(){
   "use strict";
 
-  function RandBinomial( anEngine, n, p ){
-    this.fEngine = anEngine;
-    this.n = n;
-    this.p = p;
+  function RandBinomial( args ){
+    this.fn = args.n;
+    this.fp = args.p;
+    this.fengine = args.engine || Object.create( JamesRandom({}) );
   } 
 
+  RandBinomial.Shoot = function( args ){
+    var sn = args.n || 1;
+    var sp = args.p || 0.5;
+    var sengine = args.engine || Object.create( JamesRandom({}) );
+    return this.GenBinomial( sengine, sn, sp );    
+  };
+
+  RandBinomial.ShootArray = function( args ){
+    var ssize = args.size || 1;
+    // var svect = args.vect;
+
+    var argsShoot = { n: args.n, p: args.p, engine: args.engine };
+
+    for( var i = 0; i < ssize; ++i ){
+      args.vect.push( RandBinomial.Shoot( argsShoot ) );
+    }
+  };
 
   function StirlingCorrection( k ){
     /*
@@ -96,13 +113,13 @@ define( [], function(){
   RandBinomial.prototype = {
     constructor: RandBinomial,
 
-    Fire: function( n, d ){
-      return this.GenBinomial( this.fEngine, n, p );    
+    Fire: function( ){
+      return this.GenBinomial( this.fengine, this.fn, this.fp );    
     },
 
-    FireArray: function( size, vect, n, p ){
-      for( var i = 0; i < vect.size(); i++ ){
-        vect.push( this.Fire( n, p ) );  
+    FireArray: function( /* size of vect */ size, /* Array */ vect ){
+      for( var i = 0; i < size(); i++ ){
+        vect.push( this.Fire() );  
       }
     },
 
