@@ -16,6 +16,8 @@ define(function (require) {
 
     var JamesRandom = require('BBT/Generation/Random/JamesRandom');
     var RandBinomial = require('BBT/Generation/Random/RandBinomial');
+    var RandBreitWigner = require('BBT/Generation/Random/RandBreitWigner');
+
 
     //Return the module value.
     return {
@@ -27,6 +29,7 @@ define(function (require) {
         H1: H1,
 
         JamesRandom: JamesRandom,
-        RandBinomial: RandBinomial
+        RandBinomial: RandBinomial,
+        RandBreitWigner: RandBreitWigner
     };
 });
