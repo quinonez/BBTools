@@ -31,9 +31,7 @@
 
 */
 
-define( [
-  '../Random/JamesRandom',
-], function( JamesRandom ){
+define( [ '../Random/JamesRandom' ], function( JamesRandom ){
   "use strict";
 
   function RandBreitWigner( args ){
@@ -68,9 +66,13 @@ define( [
 
   RandBreitWigner.ShootArray = function( args ){
     var ssize = args.size || 1;
+    var smean = args.mean || 1.0;
+    var sgamma = args.gamma || 0.2;
+    var scut = args.cut || undefined;
+    var sengine = args.engine || Object.create( JamesRandom({}) );
     // var svect = args.vect;
 
-    var argsShoot = { mean: args.mean, gamma: args.gamma, cut: args.cut, engine: args.engine };
+    var argsShoot = { mean: smean, gamma: sgamma, cut: scut, engine: sengine };
 
     for( var i = 0; i < ssize; ++i ){
       args.vect.push( RandBreitWigner.Shoot( argsShoot ) );
