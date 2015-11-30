@@ -11,33 +11,26 @@
    Valid input values satisfy the relation n*min(p,1-p) > 0. When invalid
    values are presented, the code silently returns -1.0.
   
-
+   +----------------------------------------------------------------------+
+   | JavaScript                                                           |
+   +----------------------------------------------------------------------+
+   F. Quinonez - Created 2015-10-30                  
    +----------------------------------------------------------------------+
    | C++                                                                  |
    +----------------------------------------------------------------------+
-
    John Marraffino - Created: 12th May 1998  Based on the C-Rand package
                      by Ernst Stadlober and Franz Niederl of the Technical
                      University of Graz, Austria.
    Gabriele Cosmo  - Removed useless methods and data: 5th Jan 1999
    M Fischler      - put and get to/from streams 12/10/04
-  
-
-   +----------------------------------------------------------------------+
-   | JavaScript                                                           |
-   +----------------------------------------------------------------------+
-
-   F. Quinonez - Created 2015-10-30                  
-
-
 */
 
-define( [], function(){
+define( [ '../Random/JamesRandom' ], function( JamesRandom ){
   "use strict";
 
   function RandBinomial( args ){
-    this.fn = args.n;
-    this.fp = args.p;
+    this.fn = args.n || 1;
+    this.fp = args.p || 0.5;
     this.fengine = args.engine || Object.create( JamesRandom({}) );
   } 
 
@@ -50,9 +43,12 @@ define( [], function(){
 
   RandBinomial.ShootArray = function( args ){
     var ssize = args.size || 1;
+    var sn = args.n || 1;
+    var sp = args.p || 0.5;
+    var sengine = args.engine || Object.create( JamesRandom({}) );
     // var svect = args.vect;
 
-    var argsShoot = { n: args.n, p: args.p, engine: args.engine };
+    var argsShoot = { n: sn, p: sp, engine: sengine };
 
     for( var i = 0; i < ssize; ++i ){
       args.vect.push( RandBinomial.Shoot( argsShoot ) );
