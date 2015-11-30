@@ -10,11 +10,14 @@
    in FORTRAN77 by Fred James as the RANMAR generator, part of the MATHLIB
    HEP library. 
 
-  
+   +----------------------------------------------------------------------+
+   | JavaScript                                                           |
+   +----------------------------------------------------------------------+
+   F. Quinonez - Created 2015-10-19                  
+               - Geant4 File
    +----------------------------------------------------------------------+
    | C++                                                                  |
    +----------------------------------------------------------------------+
-
    Gabriele Cosmo - Created: 5th September 1995
                   - Fixed a bug in setSeed(): 26th February 1996
                   - Minor corrections: 31st October 1996
@@ -34,15 +37,6 @@
   		    (lest the sequence be non-random) 2/14/05    
    M. Fischler    - put/get for vectors of ulongs	3/14/05
    M. Fischler    - State-saving using only ints, for portability 4/12/05
-  
-
-   +----------------------------------------------------------------------+
-   | JavaScript                                                           |
-   +----------------------------------------------------------------------+
-
-   F. Quinonez - Created 2015-10-19                  
-
-
 */
 
 define( [], function(){
