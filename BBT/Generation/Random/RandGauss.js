@@ -107,7 +107,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     var argsShoot = { mean: smean, stdDev: sstdDev, engine: sengine };
 
     for( var i = 0; i < ssize; ++i ){
-      args.vect.push( RandBreitWigner.Shoot( argsShoot ) );
+      args.vect.push( RandGauss.Shoot( argsShoot ) );
     }
   };
 
