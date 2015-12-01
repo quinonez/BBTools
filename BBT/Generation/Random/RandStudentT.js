@@ -8,8 +8,7 @@
    values, given a number of degrees of freedom a (default=1.0).
   
    Valid input values are a > 0.  When invalid values are presented, the
-   code silently returns DBL_MAX from <float.h> which is the same as
-   MAXDOUBLE in <values.h> on systems where the latter exists.
+   code silently returns Number.MAX_VALUE.
    +----------------------------------------------------------------------+
    | JavaScript                                                           |
    +----------------------------------------------------------------------+
@@ -61,6 +60,8 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
  
     var sa = args.a;
     var sengine = args.engine || Object.create( JamesRandom({}) );
+
+    var u,v,w;
 
     // check for valid input value
     if( sa < 0.0 ) return Number.MAX_VALUE;
