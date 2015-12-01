@@ -61,6 +61,21 @@ define([
     return ( swidth * sengine.Flat() + sa ); 
   };
 
+  RandFlat.ShootArray = function( args ){
+    var ssize = args.size || 1;
+    var sa = args.a || 0;
+    var sb = args.b || 1;
+    var swidth = args.width || ( args.b - args.a );  
+    var sengine = args.engine || Object.create( JamesRandom({}) );
+    // var svect = args.vect;
+
+    var argsShoot = { a: sa, b: sb, width: swidth, engine: sengine };
+
+    for( var i = 0; i < ssize; ++i ){
+      args.vect.push( RandFlat.Shoot( argsShoot ) );
+    }
+
+  };
 
   RandFlat.prototype = {
     constructor: RandFlat,
