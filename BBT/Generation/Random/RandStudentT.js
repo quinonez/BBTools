@@ -107,7 +107,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
       for( var i = 0; i < size(); i++ ){
         vect.push( this.Fire() );  
       }
-    },
+    }
 
   }
 
