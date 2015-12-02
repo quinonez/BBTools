@@ -61,11 +61,11 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     return RandGauss.snextGauss; 
   };
 
-  RandGauss.SetFlag = function( var value ){
+  RandGauss.SetFlag = function( value ){
     RandGauss.sset = value; 
   };
 
-  RandGauss.SetVal = function( var value ){ 
+  RandGauss.SetVal = function( value ){ 
     RandGauss.snextValue = value; 
   };
 
