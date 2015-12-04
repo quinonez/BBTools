@@ -4,19 +4,18 @@
    |                          --- RandFlat ---                            |
    |                            Module File                               |
    +----------------------------------------------------------------------+
-  
    Module defining methods for shooting flat random numbers, double or
    integers.
    It provides methods to fill with double flat values arrays of
    specified size, as well as methods for shooting sequences of 0,1 (bits).
-  
-
+   +----------------------------------------------------------------------+
+   | JavaScript                                                           |
+   +----------------------------------------------------------------------+
+   F. Quinonez - Created 2015-10-30                  
+               - Geant4 File
    +----------------------------------------------------------------------+
    | C++                                                                  |
    +----------------------------------------------------------------------+
-
-   Part of Geant4 (simulation toolkit for HEP).
-
    Gabriele Cosmo - Created: 5th September 1995
    Peter Urban    - ShootBit() and related stuff added: 5th Sep 1996
    Gabriele Cosmo - Added operator() and additional methods to fill
@@ -26,23 +25,9 @@
    M. Fischler    - Moved copy constructor to protected so that
   		    Rderived RandBit can get at it.
    M Fischler      - put and get to/from streams 12/10/04
-  
-
-   +----------------------------------------------------------------------+
-   | JavaScript                                                           |
-   +----------------------------------------------------------------------+
-
-   F. Quinonez - Created 2015-10-30                  
-
-
 */
 
-define([ 
-  '../BBT/Generation/Random/JamesRandom' 
-], function(
-  JamesRandom
-)
-{
+define([ '../Random/JamesRandom' ], function( JamesRandom ){
   "use strict";
 
   function RandFlat( args ){
