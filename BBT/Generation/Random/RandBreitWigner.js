@@ -6,7 +6,7 @@
    +----------------------------------------------------------------------+
    Module defining methods for shooting numbers according to the
    Breit-Wigner distribution algorithms (plain or mean^2).
-   Default values are set: mean=1, gamma=.2, cut=1.
+   Default values are set: mean=1, gamma=.2, cut=undefined.
    Plain algorithm is used for shootArray() and fireArray().
    +----------------------------------------------------------------------+
    | JavaScript                                                           |
@@ -39,18 +39,17 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     var sengine = args.engine || Object.create( JamesRandom({}) );
 
     if( sgamma == 0 ) return smean;
-
+    
     var rval, displ;
     rval  = 2.0 * sengine.Flat() - 1.0;
-
     if( scut === undefined ){
       // Without cut
-      displ = 0.5 * sgamma * Math.tan( rval * Math.Pi * 0.5 ); 
+      displ = 0.5 * sgamma * Math.tan( rval * Math.PI * 0.5 ); 
     } else {
       // With cut
       var val;
       val = Math.atan( 2.0 * scut / sgamma );        
-      displ = 0.5 * gamma * Math.tan( rval * rval ); 
+      displ = 0.5 * gamma * Math.tan( rval * val ); 
     }
     return ( smean + displ );
   };
@@ -70,7 +69,6 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     }
     
   };
-
 
   // Tweak CLHEP C++ that used the RandFlat::shoot static method.
   // Now this distribution has its own Shoot static function.  
@@ -124,12 +122,12 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
 
       if( this.fcut === undefined ){
         // Without cut
-        displ = 0.5 * this.fgamma * Math.tan( rval * Math.Pi * 0.5 ); 
+        displ = 0.5 * this.fgamma * Math.tan( rval * Math.PI * 0.5 ); 
       } else {
         // With cut
         var val;
         val = Math.atan( 2.0 * this.fcut / this.fgamma );        
-        displ = 0.5 * gamma * Math.tan( rval * rval ); 
+        displ = 0.5 * gamma * Math.tan( rval * val ); 
       }
       return ( this.fmean + displ );
     },

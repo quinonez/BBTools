@@ -48,7 +48,7 @@ define( [], function(){
   var maxIndex = 215;
 
   function JamesRandom( args ){
-    this.u = new Array( 97 );
+    this.u = Object.create( Array( 97 ) );
     this.c;
     this.cd;
     this.cm;

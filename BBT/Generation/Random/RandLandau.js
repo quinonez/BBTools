@@ -38,7 +38,6 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
   "use strict";
 
   function RandLandau( args ){
-
     var sengine = args.engine || Object.create( JamesRandom({}) );
   } 
 

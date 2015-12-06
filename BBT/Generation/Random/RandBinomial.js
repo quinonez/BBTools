@@ -55,7 +55,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     }
   };
 
-  RandBinomial.GenBinomial: function( anEngine, n, p ){
+  RandBinomial.GenBinomial = function( sengine, n, p ){
     /*
     +----------------------------------------------------------------------+
     |     Binomial-Distribution - Acceptance Rejection/Inversion           |
@@ -98,7 +98,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
                                    approximation for std::log(k!)  
                                    (series in 1/k or table values  
                                    for small k) with long int k    
-                 - anEngine    ... Pointer to a (0,1)-Uniform       
+                 - sengine    ... Pointer to a (0,1)-Uniform       
                                    engine                          
                                                                    
     Implemented by H. Zechner and P. Busswald, September 1992      
@@ -164,12 +164,12 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     
       K = 0;
       pk = p0;
-      U = anEngine.Flat();
+      U = sengine.Flat();
 
       while( U > pk ){
     	++K;
     	if( K > b ){
-    	  U = anEngine.Flat();
+    	  U = sengine.Flat();
     	  K = 0;
     	  pk = p0;
     	} else {
@@ -182,8 +182,8 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     } 
     
     for( ; ; ){
-      V = anEngine.Flat();
-      if( ( U = anEngine.Flat() * p4 ) <= p1 ){
+      V = sengine.Flat();
+      if( ( U = sengine.Flat() * p4 ) <= p1 ){
         // triangular region
     	K = xm - U + p1 * V;
     	return ( ( p > 0.5)? ( n - K ): K );  // immediate accept

@@ -1,7 +1,7 @@
 /* 
    +----------------------------------------------------------------------+
    |                            HEP Random                                |
-   |                      --- RandGamma ---                           |
+   |                         --- RandGamma ---                            |
    |                            Module File                               |
    +----------------------------------------------------------------------+
    Module defining methods for shooting gamma distributed random values,
@@ -62,12 +62,12 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
       // CASE A: Acceptance rejection algorithm gs
       b = 1.0 + 0.36788794412 * a;       // Step 1
       for(;;){
-        p = b * anEngine->flat();
+        p = b * sengine.Flat();
         if( p <= 1.0 ){                            // Step 2. Case gds <= 1
-	  gds = std::exp(std::log(p) / a);
-	  if (std::log(anEngine->flat()) <= -gds) return(gds/lambda);
+	  gds = Math.exp( Math.log( p ) / a);
+	  if ( Math.log( sengine.Flat() ) <= -gds) return( gds / lambda );
 	} else {                            // Step 3. Case gds > 1
-	  gds = - std::log ((b - p) / a);
+	  gds = - Math.log ((b - p) / a);
 	  if( Math.log( sengine.Flat() ) <= ( ( a - 1.0 ) * Math.log( gds ) ) ) return( gds / lambda );
 	}
       }
@@ -89,7 +89,7 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
       gds = x * x;
       if(t >= 0.0 ) return( gds / lambda);         // Immediate acceptance
 
-      u = anEngine->flat();            // Step 3. Uniform random number
+      u = sengine.Flat();            // Step 3. Uniform random number
       if( d * u <= t * t * t ) return( gds / lambda ); // Squeeze acceptance
 
       if( a != aaa ){                               // Step 4. Set-up for hat case

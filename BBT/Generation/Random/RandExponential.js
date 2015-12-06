@@ -30,8 +30,8 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
   function RandExponential( args ){
     this.fmean = args.mean || 1.0;
     this.fengine = args.engine || Object.create( JamesRandom({}) );
-    this.fnextGauss;
-    this.set;
+    //this.fnextGauss;
+    //this.set;
   } 
 
   RandExponential.Shoot = function( args ){

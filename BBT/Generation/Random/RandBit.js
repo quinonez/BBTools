@@ -40,7 +40,7 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
     return bit;
   };
 
-  RandFlat.ShootArray = function( args ){
+  RandBit.ShootArray = function( args ){
     var ssize = args.size || 1;
     var sengine = args.engine || Object.create( JamesRandom({}) );
     // var svect = args.vect;
@@ -48,7 +48,7 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
     var argsShoot = { engine: sengine };
 
     for( var i = 0; i < ssize; ++i ){
-      args.vect.push( RandFlat.Shoot( argsShoot ) );
+      args.vect.push( RandBit.Shoot( argsShoot ) );
     }
   };
 

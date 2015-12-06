@@ -107,7 +107,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
   };
 
 
-  RandPoisson.Shoot( args ){
+  RandPoisson.Shoot = function( args ){
     var smean = args.mean || 1.0;
     var poisson = new RandPoisson( args ); 
     var sengine = args.engine || Object.create( JamesRandom({}) );
@@ -229,7 +229,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
       this.fstatus[2] = g1;
 
       return ( em | 0 );    
-    };
+    },
 
     FireArray: function( /* size of vect */ size, /* Array */ vect ){
       for( var i = 0; i < size; ++i ){

@@ -38,7 +38,7 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
   } 
 
 
-  RandFlat.Shoot( args ){
+  RandFlat.Shoot = function( args ){
     var sa = args.a || 0;
     var sb = args.b || 1;
     var swidth = args.width || ( args.b - args.a );  
