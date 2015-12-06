@@ -1,12 +1,38 @@
 /*
-Graphical Module BBH1 Building Block Histogram.
-
+Graphical Module H1.
 This module has all functionalities for graphical display of user data.
 
-Module Dependencies: d3, THREE, BBMathematics, BBStatistics.
- 
 */
-define( [ 'd3', '../Visualization/Axis' ], function( d3, Axis ){
+define( [ 'd3', 
+          '../Visualization/Axis',
+          '../Generation/Random/JamesRandom',
+          '../Generation/Random/RandBinomial', 
+          '../Generation/Random/RandBit', 
+          '../Generation/Random/RandBreitWigner', 
+          '../Generation/Random/RandChiSquare', 
+          '../Generation/Random/RandExponential', 
+          '../Generation/Random/RandFlat',
+          '../Generation/Random/RandGamma', 
+          '../Generation/Random/RandGauss', 
+          '../Generation/Random/RandLandau', 
+          '../Generation/Random/RandPoisson', 
+          '../Generation/Random/RandStudentT' 
+        ], function( 
+             d3, 
+             Axis,
+             JamesRandom,
+             RandBinomial,
+             RandBit,
+             RandBreitWigner,
+             RandChiSquare,
+             RandExponential,
+             RandFlat,
+             RandGamma,
+             RandGauss,
+             RandLandau,
+             RandPoisson,
+             RandStudentT
+           ){
   "use strict";
 
   // Object Constructor H1 Building Block Histogram 1D. 
@@ -30,6 +56,109 @@ define( [ 'd3', '../Visualization/Axis' ], function( d3, Axis ){
 
     Fill: function( value ) {
       return this.rawData.push( value );
+    },
+
+    FillRandom: function( args ){
+      var siz3 = args.size || 1;
+      var n = args.n || size;
+      var v3ct = args.vect || [];
+      var pdf = args.pdf || "Gauss";
+      var s = args.seed || 234;
+
+      var pdf_mean = args.pdf_mean || undefined; // Used in: BreitWigner, Gauss, Poisson, Exponential, 
+      var pdf_stdDev = args.pdf_stdDev || undefined; // Used in: Gauss
+      var pdf_a = args.pdf_a || undefined; // Used in: ChiSquare, StudentT, Flat
+      var pdf_b = args.pdf_b || undefined; // Used in: Flat
+      var pdf_width = pdf_b - pdf_a; // Used in: Flat
+      var pdf_cut = args.pdf_cut || undefined; // Used in: BreitWigner
+      var pdf_n = args.pdf_n || undefined; // Used in: Binomial
+      var pdf_p = args.pdf_p || undefined; // Used in: Binomial
+      var pdf_k = args.pdf_k || undefined; // Used in: Gamma
+      var pdf_lambda = args.pdf_lambda || undefined; // Used in: Gamma
+      var pdf_gamma = args.pdf_gamma || undefined; // Used in: BreitWigner
+
+
+      var engine;
+      var distro;
+
+      switch( pdf ){
+        case "Bit":
+          engin3 = new BBT.JamesRandom( { seed: s } );
+          distro = new BBT.RandBit( { engine: engin3 } );
+          distro.ShootArray( { size: siz3, vect: v3ct } );
+          this.rawData = v3ct;
+          break;
+
+        case "Binomial":
+          engin3 = new BBT.JamesRandom( { seed: s } );
+          distro = new BBT.RandBinomial( { engine: engin3, n: pdf_n, p: pdf_p } );
+          distro.ShootArray( { size: siz3, vect: v3ct } );
+          this.rawData = v3ct;
+          break;
+
+        case "BreitWigner":
+          engin3 = new BBT.JamesRandom( { seed: s } );
+          distro = new BBT.RandBreitWigner( { engine: engin3, mean: pdf_mean, gamma: pdf_gamma, cut: pdf_cut } );
+          distro.ShootArray( { size: siz3, vect: v3ct } );
+          this.rawData = v3ct;
+          break;
+
+        case "ChiSquare":
+          engin3 = new BBT.JamesRandom( { seed: s } );
+          distro = new BBT.RandChiSquare( { engine: engin3, a: pdf_a } );
+          distro.ShootArray( { size: siz3, vect: v3ct } );
+          this.rawData = v3ct;
+          break;
+
+        case "Exponential":
+          engin3 = new BBT.JamesRandom( { seed: s } );
+          distro = new BBT.RandExponential( { engine: engin3, mean: pdf_mean } );
+          distro.ShootArray( { size: siz3, vect: v3ct } );
+          this.rawData = v3ct;
+          break;
+
+        case "Flat":
+          engin3 = new BBT.JamesRandom( { seed: s } );
+          distro = new BBT.RandExponential( { engine: engin3, a: pdf_a, b: pdf_b, width: pdf_width } );
+          distro.ShootArray( { size: siz3, vect: v3ct } );
+          this.rawData = v3ct;
+          break;
+
+        case "Gamma":
+          engin3 = new BBT.JamesRandom( { seed: s } );
+          distro = new BBT.RandGamma( { engine: engin3, k: pdf_k, lamda: pdf_lamda } );
+          distro.ShootArray( { size: siz3, vect: v3ct } );
+          this.rawData = v3ct;
+          break;
+
+        case "Gauss":
+          engin3 = new BBT.JamesRandom( { seed: s } );
+          distro = new BBT.RandGauss( { engine: engin3, mean: pdf_mean, stdDev: pdf_stdDev } );
+          distro.ShootArray( { size: siz3, vect: v3ct } );
+          this.rawData = v3ct;
+          break;
+
+        case "Landau":
+          engin3 = new BBT.JamesRandom( { seed: s } );
+          distro = new BBT.RandLandau( { engine: engin3 } );
+          distro.ShootArray( { size: siz3, vect: v3ct } );
+          this.rawData = v3ct;
+          break;
+
+        case "Poisson":
+          engin3 = new BBT.JamesRandom( { seed: s } );
+          distro = new BBT.RandPoisson( { engine: engin3, mean: pdf_mean } );
+          distro.ShootArray( { size: siz3, vect: v3ct } );
+          this.rawData = v3ct;
+          break;
+
+        case "StudentT":
+          engin3 = new BBT.JamesRandom( { seed: s } );
+          distro = new BBT.RandPoisson( { engine: engin3, a: pdf_a } );
+          distro.ShootArray( { size: siz3, vect: v3ct } );
+          this.rawData = v3ct;
+          break;
+      }
     },
  
     // Deattach data preparation
