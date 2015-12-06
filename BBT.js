@@ -16,7 +16,17 @@ define(function (require) {
 
     var JamesRandom = require('BBT/Generation/Random/JamesRandom');
     var RandBinomial = require('BBT/Generation/Random/RandBinomial');
+    var RandBit = require('BBT/Generation/Random/RandBit');
     var RandBreitWigner = require('BBT/Generation/Random/RandBreitWigner');
+    var RandChiSquare = require('BBT/Generation/Random/RandChiSquare');
+    var RandExponential = require('BBT/Generation/Random/RandExponential');
+    var RandFlat = require('BBT/Generation/Random/RandFlat');
+    var RandGamma = require('BBT/Generation/Random/RandGamma');
+    var RandGauss = require('BBT/Generation/Random/RandGauss');
+    //var RandGeneral = require('BBT/Generation/Random/RandGeneral');
+    var RandLandau = require('BBT/Generation/Random/RandLandau');
+    var RandPoisson = require('BBT/Generation/Random/RandPoisson');
+    var RandStudentT = require('BBT/Generation/Random/RandStudentT');
 
 
     //Return the module value.
@@ -30,6 +40,18 @@ define(function (require) {
 
         JamesRandom: JamesRandom,
         RandBinomial: RandBinomial,
-        RandBreitWigner: RandBreitWigner
+        RandBit: RandBit,
+        RandBreitWigner: RandBreitWigner,
+        RandChiSquare: RandChiSquare,
+        RandExponential: RandExponential,
+        RandFlat: RandFlat,
+        RandGamma: RandGamma,
+        RandGauss: RandGauss,
+        //RandGeneral: RandGeneral,
+        RandLandau: RandLandau,
+        RandPoisson: RandPoisson,
+        RandStudentT: RandStudentT
+        
+        
     };
 });
