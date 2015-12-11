@@ -48,14 +48,14 @@ define( [], function(){
   var maxIndex = 215;
 
   function JamesRandom( args ){
-    this.u = Object.create( Array( 97 ) );
+    this.u = [];
     this.c;
     this.cd;
     this.cm;
     this.i97;
     this.j97; 
 
-    this.theSeed = args.seed || 0; 
+    this.theSeed = args.seed || new Date().getDate(); 
 
     this.SetSeed( this.theSeed, 0 )
     this.SetSeeds( this.theSeed, 0 );
@@ -135,10 +135,10 @@ define( [], function(){
       
       this.theSeed = seed;
 
-      for ( n = 1 ; n < 98 ; n++ ) {
+      for( n = 1 ; n < 98; n++ ) {
         s = 0.0;
         t = 0.5;
-        for ( m = 1 ; m < 25 ; m++) {
+        for( m = 1 ; m < 25; m++ ) {
           mm = ( ( (i*j) % 179 ) * k ) % 179;
           i = j;
           j = k;
@@ -148,7 +148,7 @@ define( [], function(){
             s += t;
           t *= 0.5;
         }
-        this.u[n-1] = s;
+        this.u.push( s );
       }
       this.c = 362436.0 / 16777216.0;
       this.cd = 7654321.0 / 16777216.0;

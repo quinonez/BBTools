@@ -30,7 +30,7 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
   function RandGamma( args ){
    this.fk = args.k || 1.0;
    this.flambda = args.lambda || 1.0;
-   this.fengine = args.engine || Object.create( JamesRandom() );
+   this.fengine = args.engine || new JamesRandom({});
   } 
 
   RandGamma.GenGamma = function( sengine, sk, slambda ){
@@ -55,26 +55,26 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
 
     // Check for invalid input values
 
-    if( a <= 0.0 ) return (-1.0);
-    if( lambda <= 0.0 ) return (-1.0);
+    if( sk <= 0.0 ) return (-1.0);
+    if( slambda <= 0.0 ) return (-1.0);
 
-    if (a < 1.0){
+    if ( sk < 1.0 ){
       // CASE A: Acceptance rejection algorithm gs
-      b = 1.0 + 0.36788794412 * a;       // Step 1
+      b = 1.0 + 0.36788794412 * sk;       // Step 1
       for(;;){
         p = b * sengine.Flat();
         if( p <= 1.0 ){                            // Step 2. Case gds <= 1
-	  gds = Math.exp( Math.log( p ) / a);
-	  if ( Math.log( sengine.Flat() ) <= -gds) return( gds / lambda );
+	  gds = Math.exp( Math.log( p ) / sk );
+	  if ( Math.log( sengine.Flat() ) <= -gds) return( gds / slambda );
 	} else {                            // Step 3. Case gds > 1
-	  gds = - Math.log ((b - p) / a);
-	  if( Math.log( sengine.Flat() ) <= ( ( a - 1.0 ) * Math.log( gds ) ) ) return( gds / lambda );
+	  gds = - Math.log ( ( b - p ) / sk );
+	  if( Math.log( sengine.Flat() ) <= ( ( sk - 1.0 ) * Math.log( gds ) ) ) return( gds / slambda );
 	}
       }
     } else {          // CASE B: Acceptance complement algorithm gd
-      if( a != aa ){                               // Step 1. Preparations
-        aa = a;
-        ss = a - 0.5;
+      if( sk != aa ){                               // Step 1. Preparations
+        aa = sk;
+        ss = sk - 0.5;
         s = Math.sqrt( ss );
         d = 5.656854249 - 12.0 * s;
       }
@@ -87,17 +87,17 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
       t = v1 * Math.sqrt( -2.0 * Math.log( v12 ) / v12 );
       x = s + 0.5 * t;
       gds = x * x;
-      if(t >= 0.0 ) return( gds / lambda);         // Immediate acceptance
+      if(t >= 0.0 ) return( gds / slambda);         // Immediate acceptance
 
       u = sengine.Flat();            // Step 3. Uniform random number
-      if( d * u <= t * t * t ) return( gds / lambda ); // Squeeze acceptance
+      if( d * u <= t * t * t ) return( gds / slambda ); // Squeeze acceptance
 
-      if( a != aaa ){                               // Step 4. Set-up for hat case
-        aaa = a;
-	r = 1.0 / a;
+      if( sk != aaa ){                               // Step 4. Set-up for hat case
+        aaa = sk;
+	r = 1.0 / sk;
 	q0 = (((((((( q9 * r + q8 ) * r + q7 ) * r + q6 ) * r + q5 ) * r + q4 ) * r + q3 ) * r + q2 ) * r + q1 ) * r;
-	if( a > 3.686 ){
-	  if( a > 13.022 ){
+	if( sk > 3.686 ){
+	  if( sk > 13.022 ){
 	    b = 1.77;
 	    si = 0.75;
 	    c = 0.1515 / s;
@@ -113,13 +113,13 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
 	}
       }
       if( x > 0.0 ){                // Step 5. Calculation of q
-	v = t / (s + s);               // Step 6.
+	v = t / ( s + s );               // Step 6.
 	if( Math.abs( v ) > 0.25 ){
 	  q = q0 - s * t + 0.25 * t * t + ( ss + ss ) * Math.log( 1.0 + v );
 	} else {
 	  q = q0 + 0.5 * t * t * (((((((( a9 * v + a8 ) * v + a7 ) * v + a6) * v + a5) * v + a4 ) * v + a3 ) * v + a2 ) * v + a1 ) * v;
 	}                // Step 7. Quotient acceptance
-	if( Math.log( 1.0 - u ) <= q ) return( gds / lambda );
+	if( Math.log( 1.0 - u ) <= q ) return( gds / slambda );
       }
 
       for(;;){                    // Step 8. Double exponential deviate t
@@ -144,7 +144,7 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
 	}                    // Step 12. Hat acceptance
 	if( c * u * sign_u <= w * Math.exp( e - 0.5 * t * t ) ){
 	  x = s + 0.5 * t;
-	  return( x * x / lambda );
+	  return( x * x / slambda );
 	}
       }
     }
@@ -153,7 +153,7 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
   RandGamma.Shoot = function( args ){
     var sk = args.k || 1.0;
     var slambda = args.lambda || 1.0;
-    var sengine = args.engine || Object.create( JamesRandom() );
+    var sengine = args.engine || new JamesRandom({});
     return RandGamma.GenGamma( sengine, sk, slambda );
   };
 
@@ -161,11 +161,11 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
     var ssize = args.size || 1;
     var sk = args.k || 1.0;
     var slambda = args.lambda || 1.0;
-    var sengine = args.engine || Object.create( JamesRandom() );
+    var sengine = args.engine || new JamesRandom({});
     var argsShoot = { k: sk, lambda: slambda, engine: sengine };
 
     for( var i = 0; i < ssize; ++i ){
-      args.vect.push( RandFlat.Shoot( argsShoot ) );
+      args.vect.push( RandGamma.Shoot( argsShoot ) );
     }
 
   };

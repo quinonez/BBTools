@@ -29,8 +29,8 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
   "use strict";
 
   function RandStudentT( args ){
-    this.fa = args.a 
-    this.fengine = args.engine || Object.create( JamesRandom({}) );
+    this.fa = args.a || 1.0;
+    this.fengine = args.engine || new JamesRandom({});
   } 
 
   RandStudentT.Shoot = function( args ){
@@ -59,7 +59,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
      ******************************************************************/
  
     var sa = args.a;
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
 
     var u,v,w;
 
@@ -69,16 +69,16 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     do {
       u = 2.0 * sengine.Flat() - 1.0;
       v = 2.0 * sengine.Flat() - 1.0;
-    } while( ( w = u * u + u * v ) > 1.0 )
+    } while( ( w = u * u + v * v ) > 1.0 );
 
-      return ( u * Math.sqrt( sa * Math.exp( -2.0 / sa * Math.log( w ) ) - 1.0 ) / w );
+      return ( u * Math.sqrt( sa * ( Math.exp( -2.0 / sa * Math.log( w ) ) - 1.0 ) / w ) );
 
   };
 
   RandStudentT.ShootArray = function( args ){
     var ssize = args.size || 1;
     var sa = args.a || 1.0;
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
     // var svect = args.vect;
 
     var argsShoot = { a: sa, engine: sengine };
@@ -98,13 +98,13 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
       do {
         u = 2.0 * this.fengine.Flat() - 1.0;
         v = 2.0 * this.fengine.Flat() - 1.0;
-      } while( ( w = u * u + u * v) > 1.0 );
+      } while( ( w = u * u + v * v) > 1.0 );
 
-      return ( u * Math.sqrt( this.fa * Math.exp( -2.0 / this.fa * Math.log( w ) ) - 1.0 ) / w );
+      return ( u * Math.sqrt( this.fa * ( Math.exp( -2.0 / this.fa * Math.log( w ) ) - 1.0 ) / w ) );
     },
 
     FireArray: function( /* size of vect */ size, /* Array */ vect ){
-      for( var i = 0; i < size(); i++ ){
+      for( var i = 0; i < size; i++ ){
         vect.push( this.Fire() );  
       }
     }

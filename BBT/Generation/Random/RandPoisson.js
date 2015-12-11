@@ -40,7 +40,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     this.fstatus = [ 0.0, 0.0, 0.0 ];
     this.foldm = undefined;
     this.fmeanMax;
-    this.fengine = args.engine || Object.create( JamesRandom({}) );
+    this.fengine = args.engine || new JamesRandom({});
   }
 
   RandPoisson.sstatus = [ undefined, undefined, undefined ];
@@ -50,15 +50,15 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
   RandPoisson.smeanMax = undefined;
 
   RandPoisson.GetMaxMean = function(){
-    return smeanMax;    
+    return RandPoisson.smeanMax;    
   };
 
   RandPoisson.GetOldMean = function(){
-    return soldMean;    
+    return RandPoisson.soldMean;    
   };
 
   RandPoisson.GetSStatus = function(){
-    return sstatus;    
+    return RandPoisson.sstatus;    
   };
 
   RandPoisson.SetOldMean = function( value ){
@@ -110,7 +110,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
   RandPoisson.Shoot = function( args ){
     var smean = args.mean || 1.0;
     var poisson = new RandPoisson( args ); 
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
 
     // Returns as a floating-point number an integer value that is a random
     // deviation drawn from a Poisson distribution of mean xm, using flat()
@@ -127,7 +127,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
 
     if( smean === -1 ) return 0;
     if( smean < 12.0 ){
-      if( smean != oldm ){
+      if( smean != om ){
         RandPoisson.SetOldMean( smean );
         g1 = Math.exp( -smean );
       }
@@ -163,10 +163,10 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     return ( em | 0 );    
   };
 
-  RandPoisson.ShootArray = function(){
+  RandPoisson.ShootArray = function( args ){
     var ssize = args.size || 1;
     var smean = args.mean || 1.0;
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
     // var svect = args.vect;
 
     var argsShoot = { mean: smean, engine: sengine };
@@ -194,8 +194,8 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
 
       if( this.fmean === -1 ) return 0;
       if( this.fmean < 12.0 ){
-        if( this.fmean != oldm ){
-          oldm = this.fmean;
+        if( this.fmean != this.foldm ){
+          this.foldm = this.fmean;
           g1 = Math.exp( -this.fmean );
         }
         em = -1;

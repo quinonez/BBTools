@@ -34,7 +34,7 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
     this.fa = args.a || 0;
     this.fb = args.b || 1;
     this.fwidth = args.width || ( args.b - args.a );
-    this.fengine = args.engine || Object.create( JamesRandom() );
+    this.fengine = args.engine || new JamesRandom({});
   } 
 
 
@@ -42,7 +42,7 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
     var sa = args.a || 0;
     var sb = args.b || 1;
     var swidth = args.width || ( args.b - args.a );  
-    var sengine = args.engine || Object.create( JamesRandom() );
+    var sengine = args.engine || new JamesRandom({});
     return ( swidth * sengine.Flat() + sa ); 
   };
 
@@ -51,7 +51,7 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
     var sa = args.a || 0;
     var sb = args.b || 1;
     var swidth = args.width || ( args.b - args.a );  
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
     // var svect = args.vect;
 
     var argsShoot = { a: sa, b: sb, width: swidth, engine: sengine };

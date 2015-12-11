@@ -45,7 +45,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
   function RandGauss( args ){
     this.fmean = args.mean || 0.0;
     this.fstdDev = args.stdDev || 1.0;
-    this.fengine = args.engine || Object.create( JamesRandom({}) );
+    this.fengine = args.engine || new JamesRandom({});
     this.fset = false;
     this.fnextGauss;
   } 
@@ -66,19 +66,15 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
   };
 
   RandGauss.SetVal = function( value ){ 
-    RandGauss.snextValue = value; 
+    RandGauss.snextGauss = value; 
   };
 
-  RandGauss.Shoot = function( args ){
-    var smean = args.mean || 0.0;
-    var sstdDev = args.stdDev || 1.0;
-    var sengine = args.engine || Object.create( JamesRandom({}) );
-
+  RandGauss.ShootAux = function( sengine ){
     // Gaussian random numbers are generated two at the time, so every other
     // time this is called we just return a number generated the time before.
-    if ( GetFlag() ) {
-      SetFlag( false );
-      var x = GetVal();
+    if ( RandGauss.GetFlag() ) {
+      RandGauss.SetFlag( false );
+      var x = RandGauss.GetVal();
       return x; 
     } 
 
@@ -93,15 +89,26 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     fac = Math.sqrt( -2.0 * Math.log( r ) / r );
     val = v1 * fac;
     RandGauss.SetVal( val );
-    RandGaus.SetFlag( true );
-    return v2 * fac;
+    RandGauss.SetFlag( true );
+    return ( v2 * fac );
   };
 
-  RandGauss.ShootArray = function(){
-    var ssize = args.size || 1;
+  RandGauss.Shoot = function( args ){
     var smean = args.mean || 0.0;
     var sstdDev = args.stdDev || 1.0;
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
+    var stdValue = RandGauss.ShootAux( sengine );
+    console.log(stdValue*sstdDev+smean);
+    return  stdValue * sstdDev + smean;
+  };
+
+  RandGauss.ShootArray = function( args ){
+    var ssize = args.size || 1;
+    var smean = args.mean || 0.0;
+    console.log( "mean: %f", smean );
+    var sstdDev = args.stdDev || 1.0;
+    console.log( "stdDev: %f", sstdDev );
+    var sengine = args.engine || new JamesRandom({});
     // var svect = args.vect;
 
     var argsShoot = { mean: smean, stdDev: sstdDev, engine: sengine };
@@ -109,7 +116,9 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     for( var i = 0; i < ssize; ++i ){
       args.vect.push( RandGauss.Shoot( argsShoot ) );
     }
+
   };
+
 
   RandGauss.prototype = {
     constructor: RandGauss,

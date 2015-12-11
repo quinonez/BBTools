@@ -38,7 +38,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
   "use strict";
 
   function RandLandau( args ){
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
   } 
 
   var TABLE_INTERVAL = 0.001;
@@ -256,14 +256,14 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     
     
   RandLandau.Shoot = function( args ){
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
     return RandLandau.Transform( sengine.Flat() );
 
   };
 
   RandLandau.ShootArray = function( args ){
     var ssize = args.size || 1;
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
     // var svect = args.vect;
 
     var argsShoot = { engine: sengine };

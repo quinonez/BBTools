@@ -30,11 +30,11 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
   "use strict";
 
   function RandBit( args ){
-    this.fengine = args.engine || Object.create( JamesRandom({}) );
+    this.fengine = args.engine || new JamesRandom({});
   } 
 
   RandBit.Shoot = function( args ){
-    var sengine = args.engine || Object.create( JamesRandom() );
+    var sengine = args.engine || new JamesRandom({});
     var x = sengine.Flat();
     var bit = ( x > 0.5 )? 1: 0;
     return bit;
@@ -42,7 +42,7 @@ define([ '../Random/JamesRandom' ], function( JamesRandom ){
 
   RandBit.ShootArray = function( args ){
     var ssize = args.size || 1;
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
     // var svect = args.vect;
 
     var argsShoot = { engine: sengine };

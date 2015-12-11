@@ -29,21 +29,21 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
 
   function RandExponential( args ){
     this.fmean = args.mean || 1.0;
-    this.fengine = args.engine || Object.create( JamesRandom({}) );
+    this.fengine = args.engine || new JamesRandom({});
     //this.fnextGauss;
     //this.set;
   } 
 
   RandExponential.Shoot = function( args ){
     var smean = args.mean || 1.0;
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
     return -Math.log( sengine.Flat() ) * smean; 
   };
 
   RandExponential.ShootArray = function( args ){
     var ssize = args.size || 1;
     var smean = args.mean || 1.0;
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
     // var svect = args.vect;
 
     var argsShoot = { mean: smean, engine: sengine };

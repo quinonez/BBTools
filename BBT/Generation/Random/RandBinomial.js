@@ -31,13 +31,13 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
   function RandBinomial( args ){
     this.fn = args.n || 1;
     this.fp = args.p || 0.5;
-    this.fengine = args.engine || Object.create( JamesRandom({}) );
+    this.fengine = args.engine || new JamesRandom({});
   } 
 
   RandBinomial.Shoot = function( args ){
     var sn = args.n || 1;
     var sp = args.p || 0.5;
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
     return RandBinomial.GenBinomial( sengine, sn, sp );    
   };
 
@@ -45,7 +45,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     var ssize = args.size || 1;
     var sn = args.n || 1;
     var sp = args.p || 0.5;
-    var sengine = args.engine || Object.create( JamesRandom({}) );
+    var sengine = args.engine || new JamesRandom({});
     // var svect = args.vect;
 
     var argsShoot = { n: sn, p: sp, engine: sengine };
@@ -205,7 +205,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
       }
     
       // acceptance test :  two cases, depending on |K - m|
-      console.log(abs( K - m ));
+      // console.log(abs( K - m ));
       if( ( ( Km = Math.abs( K - m ) ) <= DMAX_KM )  || ( (Km + Km + 2) >= ss ) ){
         // computation of p(K) via recurrence relationship from the mode
     	f = 1.0; // f(m)
@@ -308,7 +308,7 @@ define( [ '../Random/JamesRandom' ], function( JamesRandom ){
     },
 
     FireArray: function( /* size of vect */ size, /* Array */ vect ){
-      for( var i = 0; i < size(); i++ ){
+      for( var i = 0; i < size; i++ ){
         vect.push( this.Fire() );  
       }
     },
