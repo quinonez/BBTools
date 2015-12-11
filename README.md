@@ -17,14 +17,8 @@
         * RandFlat.js
         * RandGamma.js
         * RandGauss.js
-        * RandGaussQ.js
-        * RandGaussT.js
-        * RandGeneral.js
         * RandLandau.js
         * RandPoisson.js
-        * RandPoissonQ.js
-        * RandPoissonT.js
-        * RandSkewNormal.js
         * RandStudentT.js
     * __Visualization/__
       * Axis.js
