@@ -44,7 +44,7 @@ define( [ 'd3',
     this.xmin = xmin;
     this.xmax = xmax;
     this.rawData = []; // data array filled by Fill function.
-    this.freqData = new Array( nbinsx + 2 ); // data array of frequencies for each bin. Two bins extra have been added, one for underflow and the another one for overflow.
+    this.freqData = new Array( this.nbinsx + 2 ); // data array of frequencies for each bin. Two bins extra have been added, one for underflow and the another one for overflow.
 
     this.fXaxis =new Axis("xaxishisto", "Eje x en [u]") ;
     this.fYaxis =new Axis("xaxishisto", "Eje x en [u]") ;
@@ -60,13 +60,16 @@ define( [ 'd3',
 
     FillRandom: function( args ){
       var siz3 = args.size || 1;
-      var n = args.n || size;
+      var n = args.n || siz3;
+      siz3 = n;
       var v3ct = args.vect || [];
       var pdf = args.pdf || "Gauss";
-      var s = args.seed || 234;
+      var s = args.seed || new Date().getDate();
 
-      var pdf_mean = args.pdf_mean || undefined; // Used in: BreitWigner, Gauss, Poisson, Exponential, 
+      var pdf_mean = args.pdf_mean || undefined; // Used in: BreitWigner, Gauss, Poisson, Exponential
+      console.log( "mean: %f", pdf_mean );
       var pdf_stdDev = args.pdf_stdDev || undefined; // Used in: Gauss
+      console.log( "stdDev: %f", pdf_stdDev );
       var pdf_a = args.pdf_a || undefined; // Used in: ChiSquare, StudentT, Flat
       var pdf_b = args.pdf_b || undefined; // Used in: Flat
       var pdf_width = pdf_b - pdf_a; // Used in: Flat
@@ -77,85 +80,81 @@ define( [ 'd3',
       var pdf_lambda = args.pdf_lambda || undefined; // Used in: Gamma
       var pdf_gamma = args.pdf_gamma || undefined; // Used in: BreitWigner
 
-
-      var engine;
-      var distro;
-
       switch( pdf ){
         case "Bit":
-          engin3 = new BBT.JamesRandom( { seed: s } );
-          distro = new BBT.RandBit( { engine: engin3 } );
-          distro.ShootArray( { size: siz3, vect: v3ct } );
+          var engin3 = new JamesRandom( { seed: s } );
+          var argum = { size: siz3, vect: v3ct, engine: engin3 };
+          RandBit.ShootArray( argum );
           this.rawData = v3ct;
           break;
 
         case "Binomial":
-          engin3 = new BBT.JamesRandom( { seed: s } );
-          distro = new BBT.RandBinomial( { engine: engin3, n: pdf_n, p: pdf_p } );
-          distro.ShootArray( { size: siz3, vect: v3ct } );
+          var engin3 = new JamesRandom( { seed: s } );
+          var argum = { size: siz3, vect: v3ct, engine: engin3, n: pdf_n, p: pdf_p };
+          RandBinomial.ShootArray( argum );
           this.rawData = v3ct;
           break;
 
         case "BreitWigner":
-          engin3 = new BBT.JamesRandom( { seed: s } );
-          distro = new BBT.RandBreitWigner( { engine: engin3, mean: pdf_mean, gamma: pdf_gamma, cut: pdf_cut } );
-          distro.ShootArray( { size: siz3, vect: v3ct } );
+          engin3 = new JamesRandom( { seed: s } );
+          var argum = { size: siz3, vect: v3ct, engine: engin3, mean: pdf_mean, gamma: pdf_gamma, cut: pdf_cut };
+          RandBreitWigner.ShootArray( argum );
           this.rawData = v3ct;
           break;
 
         case "ChiSquare":
-          engin3 = new BBT.JamesRandom( { seed: s } );
-          distro = new BBT.RandChiSquare( { engine: engin3, a: pdf_a } );
-          distro.ShootArray( { size: siz3, vect: v3ct } );
+          var engin3 = new JamesRandom( { seed: s } );
+          var argum = { size: siz3, vect: v3ct, engine: engin3, a: pdf_a };
+          RandChiSquare.ShootArray( argum );
           this.rawData = v3ct;
           break;
 
         case "Exponential":
-          engin3 = new BBT.JamesRandom( { seed: s } );
-          distro = new BBT.RandExponential( { engine: engin3, mean: pdf_mean } );
-          distro.ShootArray( { size: siz3, vect: v3ct } );
+          var engin3 = new JamesRandom( { seed: s } );
+          var argum = { size: siz3, vect: v3ct, engine: engin3, mean: pdf_mean };
+          RandExponential.ShootArray( argum );
           this.rawData = v3ct;
           break;
 
         case "Flat":
-          engin3 = new BBT.JamesRandom( { seed: s } );
-          distro = new BBT.RandExponential( { engine: engin3, a: pdf_a, b: pdf_b, width: pdf_width } );
-          distro.ShootArray( { size: siz3, vect: v3ct } );
+          var engin3 = new JamesRandom( { seed: s } );
+          var argum = { size: siz3, vect: v3ct, engine: engin3, a: pdf_a, b: pdf_b, width: pdf_width };
+          RandFlat.ShootArray( argum );
           this.rawData = v3ct;
           break;
 
         case "Gamma":
-          engin3 = new BBT.JamesRandom( { seed: s } );
-          distro = new BBT.RandGamma( { engine: engin3, k: pdf_k, lamda: pdf_lamda } );
-          distro.ShootArray( { size: siz3, vect: v3ct } );
+          var engin3 = new JamesRandom( { seed: s } );
+          var argum = { size: siz3, vect: v3ct, engine: engin3, k: pdf_k, lamda: pdf_lambda };
+          RandGamma.ShootArray( argum );
           this.rawData = v3ct;
           break;
 
         case "Gauss":
-          engin3 = new BBT.JamesRandom( { seed: s } );
-          distro = new BBT.RandGauss( { engine: engin3, mean: pdf_mean, stdDev: pdf_stdDev } );
-          distro.ShootArray( { size: siz3, vect: v3ct } );
+          var engin3 = new JamesRandom( { seed: s } );
+          var argum = { size: siz3, vect: v3ct, engine: engin3, mean: pdf_mean, stdDev: pdf_stdDev };
+          RandGauss.ShootArray( argum );
           this.rawData = v3ct;
           break;
 
         case "Landau":
-          engin3 = new BBT.JamesRandom( { seed: s } );
-          distro = new BBT.RandLandau( { engine: engin3 } );
-          distro.ShootArray( { size: siz3, vect: v3ct } );
+          var engin3 = new JamesRandom( { seed: s } );
+          var argum = { size: siz3, vect: v3ct, engine: engin3 };
+          RandLandau.ShootArray( argum );
           this.rawData = v3ct;
           break;
 
         case "Poisson":
-          engin3 = new BBT.JamesRandom( { seed: s } );
-          distro = new BBT.RandPoisson( { engine: engin3, mean: pdf_mean } );
-          distro.ShootArray( { size: siz3, vect: v3ct } );
+          var engin3 = new JamesRandom( { seed: s } );
+          var argum = { size: siz3, vect: v3ct, engine: engin3, mean: pdf_mean };
+          RandPoisson.ShootArray( argum );
           this.rawData = v3ct;
           break;
 
         case "StudentT":
-          engin3 = new BBT.JamesRandom( { seed: s } );
-          distro = new BBT.RandPoisson( { engine: engin3, a: pdf_a } );
-          distro.ShootArray( { size: siz3, vect: v3ct } );
+          var engin3 = new JamesRandom( { seed: s } );
+          var argum = { size: siz3, vect: v3ct, engine: engin3, a: pdf_a };
+          RandStudentT.ShootArray( argum );
           this.rawData = v3ct;
           break;
       }
@@ -177,7 +176,7 @@ define( [ 'd3',
         binxlow = this.xmin;
         binxup = binxlow + binwidth;
         if( this.rawData[ i ] < this.xmin ) this.freqData[ 0 ] += 1; // Underflow.
-        if( this.rawData[ i ] >= this.xmax ) this.freqData[ nbinsx + 1 ] += 1; // Overflow.
+        if( this.rawData[ i ] >= this.xmax ) this.freqData[ this.nbinsx + 1 ] += 1; // Overflow.
         // From index 1 til index nbinsx-2 of freqData Array.
         for( var j = 1; j < this.freqData.length - 1; j++ ){
           if( this.rawData[ i ] >= binxlow && this.rawData[ i ] < binxup ){
@@ -235,8 +234,8 @@ define( [ 'd3',
       // Don't do it because that need to be accessed by the user
 
       // Displaying data    
-      this.freqData.forEach(function(d,i){
-		        chart.append( "rect" )
+      this.freqData.forEach(function(d,i,a){
+		        if( i > 0 && i < a.length ) chart.append( "rect" )
           .attr( "x", function(){return (i-1)*xScale(binwidth);} )
           .attr( "width", xScale(binwidth)-2)
           .attr( "y", yScale(d) )
