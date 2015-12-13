@@ -235,7 +235,7 @@ define( [ 'd3',
 
       // Displaying data    
       this.freqData.forEach(function(d,i,a){
-		        if( i > 0 && i < a.length ) chart.append( "rect" )
+		        if( i > 0 && i < a.length - 1 ) chart.append( "rect" )
           .attr( "x", function(){return (i-1)*xScale(binwidth);} )
           .attr( "width", xScale(binwidth)-2)
           .attr( "y", yScale(d) )
