@@ -60,6 +60,7 @@ p is the probability to obtain 1 in one Bernoulli trial.
     var maximo = B[indmax];
     console.log("minimo %f",minimo);
     console.log("maximo %f",maximo);
+  ```
 
 
 ##### README USAGE OF RandBit
