@@ -9,7 +9,7 @@ Using it by doing:
 	git clone https://github.com/quinonez/BBTools
 	cd BBTools
 	git tag
-	git checkout v1.2
+	git checkout v1.3
 ```
 * Start using it by going to ```workarea``` and edit files ```BBT-tests.js``` and ```index.html```.
 * Open ```index.html``` with your favorite web browser.
