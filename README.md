@@ -36,7 +36,10 @@ Using it by doing:
 * Objects of kind H1 have a new member function: FillRandom that fill an 1D histogram with random values according to an especified probability distribution function.
 * Folders with examples on ```BBTools/workarea```: ```jamesrandom```, ```rand*```, ```h1fillrandom```.
 
+
+
 ##### README USAGE OF RandBinomial
+
 n is the number of Bermoulli trials. 
 n is must be less or equal than the array's size
 p is the probability to obtain 1 in one Bernoulli trial.
@@ -58,7 +61,9 @@ p is the probability to obtain 1 in one Bernoulli trial.
     console.log("minimo %f",minimo);
     console.log("maximo %f",maximo);
 
+
 ##### README USAGE OF RandBit
+
 
 ###### Approach 1
 
@@ -92,7 +97,9 @@ p is the probability to obtain 1 in one Bernoulli trial.
     console.log(A);
   ```
 
+
 ##### README USAGE OF RandBreitWigner
+
 
 ###### Approach 1
 
@@ -130,7 +137,9 @@ p is the probability to obtain 1 in one Bernoulli trial.
     console.log( bw.FireM2() );
   ```
 
+
 ##### README USAGE OF RandChiSquare
+
 
 ###### Approach 1
 
@@ -164,7 +173,9 @@ p is the probability to obtain 1 in one Bernoulli trial.
     console.log(A);
   ```
 
+
 ##### README USAGE OF RandExponential
+
 
 ###### Approach 1
 
@@ -198,7 +209,9 @@ p is the probability to obtain 1 in one Bernoulli trial.
     console.log(A);
   ```
 
+
 ##### README USAGE OF RandFlat
+
 
 ###### Approach 1
 
@@ -232,7 +245,9 @@ p is the probability to obtain 1 in one Bernoulli trial.
     console.log(A);
   ```
 
+
 ##### README USAGE OF RandGamma
+
 
 ###### Approach 1
 
@@ -266,7 +281,9 @@ p is the probability to obtain 1 in one Bernoulli trial.
     console.log(A);
   ```
 
+
 ##### README USAGE OF RandGauss
+
 
 ###### Approach 1
 
@@ -300,7 +317,9 @@ p is the probability to obtain 1 in one Bernoulli trial.
     console.log(A);
   ```
 
+
 ##### README USAGE OF RandLandau
+
 
 ###### Approach 1
 
@@ -313,7 +332,9 @@ p is the probability to obtain 1 in one Bernoulli trial.
     console.log(A);
   ```
 
+
 ##### README USAGE OF RandPoisson
+
 
 ###### Approach 1
 
@@ -347,7 +368,9 @@ p is the probability to obtain 1 in one Bernoulli trial.
     console.log(A);
   ```
 
+
 ##### README USAGE OF RandStudentT
+
 
 ###### Approach 1
 
@@ -491,9 +514,14 @@ Same as version 1.0 but including folder of examples called ```BBTools/workarea`
     * __randflat/__
       * BBT-tests.js
       * index.html
-      * index.php
-      * qunit.css
-      * qunit.js
+      * README.md
+    * __randgamma/__
+      * BBT-tests.js
+      * index.html
+      * README.md
+    * __randgauss/__
+      * BBT-tests.js
+      * index.html
       * README.md
     * __randlandau/__
       * BBT-tests.js
