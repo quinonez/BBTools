@@ -39,22 +39,6 @@ if (typeof require === 'function' && require.config) {
 }(this, function (BBT, $) {
     'use strict';
 
-    test('version test', function () {
-        expect(1);
-        strictEqual(BBT.version,
-            '0.0.1, jQuery version is: ' + $.fn.jquery,
-            'Version concatenated');
-    });
-
-    test('conversion test', function () {
-        expect(1);
-        strictEqual(BBT.convert('Harry & Sally'),
-            'Harry &amp; Sally',
-            'Ampersand converted');
-    });
-
-
-
 
     /*
     //------------------------------------------------------------------------------------------
